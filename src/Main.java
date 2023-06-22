@@ -14,7 +14,7 @@ public class Main {
 
 
         for (String text : texts) {
-            Runnable logic = () -> {
+            threads.add(new Thread(() -> {
                 int maxSize = 0;
                 for (int i = 0; i < text.length(); i++) {
                     for (int j = 0; j < text.length(); j++) {
@@ -34,8 +34,7 @@ public class Main {
                     }
                 }
                 System.out.println(text.substring(0, 100) + " -> " + maxSize);
-            };
-            threads.add(new Thread(logic));
+            }));
         }
 
         for (Thread thread : threads) {
